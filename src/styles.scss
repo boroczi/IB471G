@@ -1,1 +1,34 @@
-/* You can add global styles to this file, and also import other style files */
+$colors: #ffcc70, #c850c0, #4158d0;
+$background-color: #0a0a0a;
+$animation-speed: 8s;
+
+body {
+  background: $background-color;
+  position: relative;
+  overflow: hidden;
+}
+
+.background-overlay {
+  position: absolute;
+  left: calc(50% - 50.625rem / 2);
+  top: calc(-6.75rem / 2);
+  width: 50.625rem;
+  height: 6.75rem;
+  background: conic-gradient(from 90deg at 50% 50%, $colors 180deg);
+  animation: pulseEffect $animation-speed ease-in-out infinite alternate;
+  filter: blur(40px);
+  rotate: 180deg;
+  flex-shrink: 0;
+  border-radius: 50%;
+}
+
+@keyframes pulseEffect {
+  0% {
+    transform: scale(1);
+    opacity: 0.24;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0.16;
+  }
+}
