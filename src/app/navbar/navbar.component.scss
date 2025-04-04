@@ -1,3 +1,9 @@
+$background-color: #0a0a0a;
+
+.mat-toolbar {
+  background-color: transparent;
+}
+
 .menu-button {
   display: none;
 }
@@ -16,6 +22,8 @@
 .sidenav {
   position: fixed;
   height: 100%;
+  text-align: center;
+  background-color: $background-color;
 }
 
 @media (max-width: 768px) {
@@ -25,10 +33,4 @@
   .menu-button {
     display: inline;
   }
-}
-
-.sidenav-container, .sidenav, .sidenav-content {
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
 }
