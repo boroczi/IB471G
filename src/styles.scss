@@ -1,5 +1,8 @@
+@use '@angular/material' as mat;
+
 $colors: #ffcc70, #c850c0, #4158d0;
 $background-color: #0a0a0a;
+$snackbar-color: #181818;
 $animation-speed: 8s;
 
 body {
@@ -36,8 +39,9 @@ body {
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.snackbar {
-  background-color: #323232;
-  color: #ffffff;
-  text-align: center;
+:root {
+  @include mat.snack-bar-overrides((
+    container-color: $snackbar-color,
+    supporting-text-color: white,
+  ));
 }
