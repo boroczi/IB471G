@@ -8,7 +8,6 @@ import {MatListItem, MatNavList} from '@angular/material/list';
 
 @Component({
   selector: 'app-navbar',
-  standalone: true,
   imports: [
     MatSidenavModule,
     MatToolbarModule,

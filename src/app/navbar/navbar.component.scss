@@ -2,13 +2,20 @@
   display: none;
 }
 
-.spacer {
-  flex: 1;
+.desktop-nav {
+  display: flex;
+  flex: auto;
+  justify-content: center;
 }
 
 .desktop-nav a {
-  margin: 0 15px;
-  font-size: 18px;
+  margin: 0 1rem;
+  font-size: 1rem;
+}
+
+.sidenav {
+  position: fixed;
+  height: 100%;
 }
 
 @media (max-width: 768px) {
@@ -18,4 +25,10 @@
   .menu-button {
     display: inline;
   }
+}
+
+.sidenav-container, .sidenav, .sidenav-content {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
 }
