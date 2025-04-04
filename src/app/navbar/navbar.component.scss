@@ -1,0 +1,21 @@
+.menu-button {
+  display: none;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.desktop-nav a {
+  margin: 0 15px;
+  font-size: 18px;
+}
+
+@media (max-width: 768px) {
+  .desktop-nav {
+    display: none;
+  }
+  .menu-button {
+    display: inline;
+  }
+}
