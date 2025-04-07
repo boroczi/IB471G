@@ -1,0 +1,41 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button (click)="toggle()" class="menu-button">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <nav class="desktop-nav">
+    @for (item of navItems; track $index) {
+      @if (user?.role == 'admin' && item.role == 'admin' || item.role == 'user' || item.role == null) {
+        @if (!item.mobileOnly) {
+          @if (item.routerLink) {
+            <a mat-button routerLink="{{ item.routerLink }}">{{ item.label }}</a>
+          } @else if (item.isLogout) {
+            <a mat-button (click)="logout()">{{ item.label }}</a>
+          } @else {
+            <a mat-button>{{ item.label }}</a>
+          }
+        }
+      }
+    }
+  </nav>
+</mat-toolbar>
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="over" class="sidenav">
+    <mat-nav-list>
+      @for (item of navItems; track $index) {
+        @if (user?.role == 'admin' && item.role == 'admin' || item.role == 'user' || item.role == null) {
+          @if (item.routerLink) {
+            <a mat-list-item routerLink="{{ item.routerLink }}" (click)="sidenav.close()">{{ item.label }}</a>
+          } @else if (item.isLogout) {
+            <a mat-list-item (click)="logout()">{{ item.label }}</a>
+          } @else {
+            <a mat-list-item (click)="sidenav.close()">{{ item.label }}</a>
+          }
+        }
+      }
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
