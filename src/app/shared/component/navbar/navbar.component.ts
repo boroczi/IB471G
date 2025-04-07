@@ -5,7 +5,9 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSidenav, MatSidenavModule} from '@angular/material/sidenav';
 import {MatListItem, MatNavList} from '@angular/material/list';
-import {INavItem} from '../shared/interface/navitem.interface';
+import {INavItem} from '../../interface/navitem.interface';
+import {IUser} from '../../interface/user.interface';
+import { LocalstorageService } from '../../service/localstorage.service';
 
 @Component({
   selector: 'app-navbar',
@@ -25,20 +27,29 @@ import {INavItem} from '../shared/interface/navitem.interface';
 export class NavbarComponent {
   @ViewChild('sidenav') sidenav: MatSidenav | undefined;
 
+  protected readonly navItems : INavItem[] = [
+    {label: 'Vissza', mobileOnly: true},
+    {label: 'Főoldal', routerLink: '/'},
+    {label: 'Események', routerLink: '/events'},
+    {label: 'Profil', role: 'user', routerLink: '/profile'},
+    {label: 'Admin', role: 'admin', routerLink: '/admin'},
+    {label: 'Kijelentkezés', role: 'user', isLogout: true},
+  ];
+
+  user: Partial<IUser> | null;
+
+  constructor(private localStorage: LocalstorageService) {
+    this.user = this.localStorage.getItem('user') as Partial<IUser> || null;
+  }
+
   toggle() : void {
     if (this.sidenav) {
       this.sidenav.toggle();
     }
   }
 
-  protected readonly navItems = navItems;
+  logout() : void {
+    this.localStorage.removeItem('user');
+    console.log('logout');
+  }
 }
-
-const navItems : INavItem[] = [
-  {label: '< Vissza', role: 'user', mobileOnly: true},
-  {label: 'Home', role: 'user', routerLink: '/'},
-  {label: 'Tickets', role: 'user', routerLink: '/tickets'},
-  {label: 'Users', role: 'user', routerLink: '/users'},
-  {label: 'Settings', role: 'user', routerLink: '/settings'},
-  {label: 'Logout', role: 'user', routerLink: '/logout'}
-];

@@ -26,6 +26,10 @@ $background-color: #0a0a0a;
   background-color: $background-color;
 }
 
+.sidenav-container {
+  z-index: 2;
+}
+
 @media (max-width: 768px) {
   .desktop-nav {
     display: none;
@@ -34,3 +38,4 @@ $background-color: #0a0a0a;
     display: inline;
   }
 }
+
