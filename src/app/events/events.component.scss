@@ -1,0 +1,47 @@
+.event-card {
+  width: 64%;
+  margin: 4rem auto;
+  background-color: transparent;
+}
+
+.event-date {
+  font-size: 0.8rem;
+  color: gray;
+}
+
+mat-card-header {
+  padding: 16px 16px 0 16px;
+}
+
+mat-card-title {
+  font-size: 1.6rem;
+  color: #fff;
+  margin-bottom: 0.8rem;
+}
+
+.available-tickets {
+  color: #8bed92;
+}
+
+.total-tickets {
+  color: #3bdaa4;
+}
+
+mat-expansion-panel {
+  background: rgba(40, 40, 40, 0.4);
+  color: #fff;
+  border: 0.04rem solid rgba(80, 80, 80, 0.4);
+}
+
+mat-panel-title {
+  font-size: 1.2rem;
+}
+
+mat-panel-description {
+  font-size: 0.8rem;
+  color: gray;
+}
+
+button {
+  margin-top: 1rem;
+}

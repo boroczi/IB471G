@@ -1,0 +1,52 @@
+<mat-card class="event-card">
+  <mat-card-header>
+    <mat-card-title>Események</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-accordion>
+      @for (event of events; track $index) {
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{ event.name }}
+            </mat-panel-title>
+            <mat-panel-description>
+              <span class="event-date">{{ event.startTime | date }} - {{ event.endTime | date }}</span>
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+
+          <table>
+            <tr>
+              <td><strong>Helyszín:</strong></td>
+              <td>{{ event.location }}</td>
+            </tr>
+            <tr>
+              <td><strong>Elérhető jegyek:</strong></td>
+              <td>{{ event.availableTickets }} / {{ event.totalTickets }}</td>
+            </tr>
+            <tr>
+              <td><strong>Leírás:</strong></td>
+              <td>{{ event.description }}</td>
+            </tr>
+            <tr>
+              <td><strong>Ár:</strong></td>
+              <td>{{ event.ticketPrice }} Ft</td>
+            </tr>
+          </table>
+
+          <button mat-fab extended>
+            <mat-icon>shopping_cart</mat-icon>
+            Kosárba
+          </button>
+        </mat-expansion-panel>
+      }
+    </mat-accordion>
+
+    @if (events.length === 0) {
+      <div>
+        Nincs elérhető koncert!
+      </div>
+    }
+  </mat-card-content>
+</mat-card>
