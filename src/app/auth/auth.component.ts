@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {MatCard, MatCardContent, MatCardHeader, MatCardTitle} from '@angular/material/card';
+import {MatCard, MatCardContent, MatCardHeader} from '@angular/material/card';
 import {MatFabButton, MatIconButton} from '@angular/material/button';
 import {EAuth} from '../shared/enum/auth.enum';
 import {MatIcon} from '@angular/material/icon';
