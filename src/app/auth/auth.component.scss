@@ -1,0 +1,78 @@
+.auth-card-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  backdrop-filter: blur(10px);
+}
+
+.auth-card {
+  width: 64%;
+  padding: 2rem;
+  border-radius: 0.8rem;
+  background: rgba(22, 22, 22, 1);
+  color: #fff;
+  border: 0.04rem solid rgba(46, 46, 46, 1);
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%);
+  backdrop-filter: blur(118px);
+  z-index: 2;
+}
+
+.close-button {
+  background-color: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: -0.4rem;
+  position: absolute;
+  right: 1rem;
+}
+
+mat-card-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.card-section {
+  flex: 1;
+  padding: 2rem;
+
+  h1 {
+    color: #fff;
+    font-size: 1.6rem;
+  }
+
+  p {
+    margin-bottom: 2rem;
+    color: #dddddd;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+
+.divider {
+  width: 0.2rem;
+  height: 16rem;
+  margin: 0 4rem;
+  border-radius: 1rem;
+  background-color: #ccc;
+}
+
+@media screen and (max-width: 960px) {
+  mat-card-content {
+    flex-direction: column;
+  }
+
+  .divider {
+    width: 100%;
+    height: 0.2rem;
+    margin: 4rem 0;
+  }
+}
+

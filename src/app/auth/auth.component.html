@@ -1,0 +1,23 @@
+<div class="auth-card-container">
+  <mat-card class="auth-card">
+    <mat-card-header>
+      <button mat-icon-button class="close-button" (click)="close()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-card-header>
+
+    <mat-card-content>
+      <div class="card-section">
+        <h1>Van már fiókod?</h1>
+        <p>Jelentkezz be a fiókodba, hogy megvásárold a jegyed!</p>
+        <button mat-fab extended (click)="changeModal(EAuth.login)">Bejelentkezés</button>
+      </div>
+      <div class="divider"></div>
+      <div class="card-section">
+        <h1>Még nincs fiókod?</h1>
+        <p>Hozz létre egy új fiókot!</p>
+        <button mat-fab extended (click)="changeModal(EAuth.signup)">Regisztráció</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
