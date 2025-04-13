@@ -1,0 +1,59 @@
+.login-card-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  backdrop-filter: blur(10px);
+}
+
+.login-card {
+  width: 32%;
+  margin: 4rem auto;
+  border-radius: 0.8rem;
+  background: rgba(22, 22, 22, 1);
+  color: #fff;
+  border: 0.04rem solid rgba(46, 46, 46, 1);
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%);
+  backdrop-filter: blur(118px);
+  z-index: 2;
+}
+
+.close-button {
+  background-color: transparent;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: -0.4rem;
+  position: absolute;
+  right: 1rem;
+}
+
+mat-card-header {
+  padding: 16px 16px 0 16px;
+}
+
+mat-card-content {
+  text-align: center;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+mat-form-field input {
+  width: 100%;
+}
+
+mat-card-title {
+  font-size: 1.6rem;
+  color: #fff;
+  margin-bottom: 0.8rem;
+}
+
+@media (max-width: 768px) {
+  mat-card-title {
+    visibility: hidden;
+  }
+}
