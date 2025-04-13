@@ -1,0 +1,40 @@
+.profile-card {
+  width: 64%;
+  margin: 4rem auto;
+  background-color: transparent;
+}
+
+.profile-picture {
+  text-align: center;
+  margin: 1rem 0;
+}
+
+mat-card-header {
+  padding: 16px 16px 0 16px;
+}
+
+mat-card-title {
+  font-size: 1.6rem;
+  color: #fff;
+  margin-bottom: 0.8rem;
+}
+
+mat-card-content {
+  background: rgba(40, 40, 40, 0.4);
+  border-radius: 0.8rem;
+  border: 0.04rem solid rgba(80, 80, 80, 0.4);
+}
+
+mat-card-content table {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+mat-card-content table td {
+  padding: 0.5rem 0;
+  color: #fff;
+}
+
+button {
+  margin-top: 1rem;
+}
