@@ -1,0 +1,43 @@
+.checkout-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+
+  mat-card {
+    padding: 20px;
+    width: 80%;
+    max-width: 800px;
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      margin-bottom: 20px;
+
+      input {
+        width: 60px;
+        text-align: center;
+      }
+
+      button {
+        cursor: pointer;
+      }
+    }
+
+    .checkout-summary {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      h3 {
+        margin: 0;
+      }
+
+      button {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}
