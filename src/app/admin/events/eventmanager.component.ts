@@ -5,18 +5,19 @@ import {MatIconModule} from '@angular/material/icon';
 import {IEvent} from '../../shared/interface/event.interface';
 import {DatePipe} from '../../shared/pipe/date.pipe';
 import {MatExpansionModule} from '@angular/material/expansion';
-import {MatFabButton} from '@angular/material/button';
+import {MatFabButton, MatIconButton} from '@angular/material/button';
 
 @Component({
   selector: 'app-eventmanager',
-    imports: [
-        MatCardModule,
-        MatTableModule,
-        MatIconModule,
-        DatePipe,
-        MatExpansionModule,
-        MatFabButton
-    ],
+  imports: [
+    MatCardModule,
+    MatTableModule,
+    MatIconModule,
+    DatePipe,
+    MatExpansionModule,
+    MatIconButton,
+    MatFabButton
+  ],
   templateUrl: './eventmanager.component.html',
   styleUrl: './eventmanager.component.scss'
 })
