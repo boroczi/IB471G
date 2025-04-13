@@ -7,11 +7,13 @@
       @if (user?.role == 'admin' && item.role == 'admin' || item.role == 'user' || item.role == null) {
         @if (!item.mobileOnly) {
           @if (item.routerLink) {
-            <a mat-button routerLink="{{ item.routerLink }}">{{ item.label }}</a>
-          } @else if (item.isLogout) {
+            @if (item.isLogout != false) {
+              <a mat-button (click)="closeAuth()" routerLink="{{ item.routerLink }}">{{ item.label }}</a>
+            }
+          } @else if (item.click) {
+            <a mat-button (click)="item.click()">{{ item.label }}</a>
+          } @else if (this.user) {
             <a mat-button (click)="logout()">{{ item.label }}</a>
-          } @else {
-            <a mat-button>{{ item.label }}</a>
           }
         }
       }
@@ -25,10 +27,14 @@
       @for (item of navItems; track $index) {
         @if (user?.role == 'admin' && item.role == 'admin' || item.role == 'user' || item.role == null) {
           @if (item.routerLink) {
-            <a mat-list-item routerLink="{{ item.routerLink }}" (click)="sidenav.close()">{{ item.label }}</a>
-          } @else if (item.isLogout) {
-            <a mat-list-item (click)="logout()">{{ item.label }}</a>
-          } @else {
+            @if (item.isLogout != false) {
+              <a mat-list-item routerLink="{{ item.routerLink }}" (click)="sidenav.close()">{{ item.label }}</a>
+            }
+          } @else if (item.click) {
+            <a mat-list-item (click)="item.click()">{{ item.label }}</a>
+          } @else if (this.user) {
+            <a mat-button (click)="logout()">{{ item.label }}</a>
+          } @else if (item.mobileOnly) {
             <a mat-list-item (click)="sidenav.close()">{{ item.label }}</a>
           }
         }
@@ -39,3 +45,13 @@
     <ng-content></ng-content>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+@if (this.showAuth) {
+  @if (authModal == EAuth.auth) {
+    <app-auth [closeModal]="closeAuth.bind(this)" (modal)="changeModal($event)"></app-auth>
+  } @else if (authModal == EAuth.login) {
+    <app-login [changeModal]="changeModal.bind(this)" (user)="setUser($event)"></app-login>
+  } @else if (authModal == EAuth.signup) {
+    <app-signup [changeModal]="changeModal.bind(this)"></app-signup>
+  }
+}

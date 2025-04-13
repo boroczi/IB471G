@@ -7,7 +7,11 @@ import {MatSidenav, MatSidenavModule} from '@angular/material/sidenav';
 import {MatListItem, MatNavList} from '@angular/material/list';
 import {INavItem} from '../../interface/navitem.interface';
 import {IUser} from '../../interface/user.interface';
-import { LocalstorageService } from '../../service/localstorage.service';
+import {AuthComponent} from '../../../auth/auth.component';
+import {LoginComponent} from '../../../auth/login/login.component';
+import {SignupComponent} from '../../../auth/signup/signup.component';
+import {EAuth} from '../../enum/auth.enum';
+import {SnackbarService} from '../../service/snackbar.service';
 
 @Component({
   selector: 'app-navbar',
@@ -18,7 +22,10 @@ import { LocalstorageService } from '../../service/localstorage.service';
     MatIconModule,
     RouterLink,
     MatNavList,
-    MatListItem
+    MatListItem,
+    AuthComponent,
+    LoginComponent,
+    SignupComponent
   ],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
@@ -26,30 +33,63 @@ import { LocalstorageService } from '../../service/localstorage.service';
 
 export class NavbarComponent {
   @ViewChild('sidenav') sidenav: MatSidenav | undefined;
+  showAuth: boolean = false;
+  authModal: EAuth = EAuth.auth;
 
-  protected readonly navItems : INavItem[] = [
+  protected readonly navItems: INavItem[] = [
     {label: 'Vissza', mobileOnly: true},
     {label: 'Főoldal', routerLink: '/'},
     {label: 'Események', routerLink: '/events'},
-    {label: 'Profil', role: 'user', routerLink: '/profile'},
+    {label: 'Profil', role: 'user', routerLink: '/profile', isLogout: false},
     {label: 'Admin', role: 'admin', routerLink: '/admin'},
+    {label: 'Bejelentkezés', click: () => this.toggleAuth(), isLogout: false},
     {label: 'Kijelentkezés', role: 'user', isLogout: true},
   ];
 
   user: Partial<IUser> | null;
 
-  constructor(private localStorage: LocalstorageService) {
-    this.user = this.localStorage.getItem('user') as Partial<IUser> || null;
+  constructor(private SnackBar: SnackbarService) {
+    this.user = null;
   }
 
-  toggle() : void {
+  setUser(user: Partial<IUser>) : void {
+    this.user = user;
+  }
+
+  toggle(): void {
     if (this.sidenav) {
       this.sidenav.toggle();
     }
   }
 
-  logout() : void {
-    this.localStorage.removeItem('user');
-    console.log('logout');
+  logout(): void {
+    this.user = null;
+    this.SnackBar.open("Sikeresen kijelentkeztél!")
   }
+
+  closeAuth(): void {
+    if (this.showAuth) {
+      this.authModal = EAuth.auth;
+    }
+
+    this.showAuth = false;
+  }
+
+  toggleAuth(): void {
+    if (this.sidenav) {
+      this.sidenav.close();
+    }
+
+    if (this.showAuth) {
+      this.authModal = EAuth.auth;
+    }
+
+    this.showAuth = !this.showAuth;
+  }
+
+  changeModal(modal: EAuth): void {
+    this.authModal = modal;
+  }
+
+  protected readonly EAuth = EAuth;
 }
