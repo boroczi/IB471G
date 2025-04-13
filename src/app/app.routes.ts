@@ -12,26 +12,6 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
-    path: 'auth',
-    loadComponent: () => import('./auth/auth.component').then(m => m.AuthComponent),
-    pathMatch: 'full',
-  },
-  {
-    path: 'auth',
-    children: [
-      {
-        path: 'login',
-        loadComponent: () => import('./auth/login/login.component').then(m => m.LoginComponent),
-        pathMatch: 'full'
-      },
-      {
-        path: 'signup',
-        loadComponent: () => import('./auth/signup/signup.component').then(m => m.SignupComponent),
-        pathMatch: 'full'
-      }
-    ]
-  },
-  {
     path: 'checkout',
     loadComponent: () => import('./checkout/checkout.component').then(m => m.CheckoutComponent),
     pathMatch: 'full',
