@@ -4,7 +4,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
 import {MatFabButton, MatIconButton} from '@angular/material/button';
-import { IUser } from '../../shared/interface/user.interface';
+import {users} from '../../shared/constant/users.const';
 
 @Component({
   selector: 'app-usermanager',
@@ -20,33 +20,5 @@ import { IUser } from '../../shared/interface/user.interface';
   styleUrl: './usermanager.component.scss'
 })
 export class UserManagerComponent {
-  users: IUser[] = [
-    {
-      id: 1,
-      username: 'admin',
-      password: 'admin123',
-      email: 'admin@example.com',
-      firstName: 'Admin',
-      lastName: 'User',
-      role: 'admin'
-    },
-    {
-      id: 2,
-      username: 'johndoe',
-      password: 'password123',
-      email: 'johndoe@example.com',
-      firstName: 'John',
-      lastName: 'Doe',
-      role: 'user'
-    },
-    {
-      id: 3,
-      username: 'janedoe',
-      password: 'password456',
-      email: 'janedoe@example.com',
-      firstName: 'Jane',
-      lastName: 'Doe',
-      role: 'user'
-    }
-  ];
+  protected readonly users = users;
 }

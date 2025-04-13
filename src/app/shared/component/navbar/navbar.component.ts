@@ -5,13 +5,13 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSidenav, MatSidenavModule} from '@angular/material/sidenav';
 import {MatListItem, MatNavList} from '@angular/material/list';
-import {INavItem} from '../../interface/navitem.interface';
 import {IUser} from '../../interface/user.interface';
 import {AuthComponent} from '../../../auth/auth.component';
 import {LoginComponent} from '../../../auth/login/login.component';
 import {SignupComponent} from '../../../auth/signup/signup.component';
 import {EAuth} from '../../enum/auth.enum';
 import {SnackbarService} from '../../service/snackbar.service';
+import {INavItem} from '../../interface/navitem.interface';
 
 @Component({
   selector: 'app-navbar',
@@ -35,13 +35,13 @@ export class NavbarComponent {
   @ViewChild('sidenav') sidenav: MatSidenav | undefined;
   showAuth: boolean = false;
   authModal: EAuth = EAuth.auth;
-
   protected readonly navItems: INavItem[] = [
     {label: 'Vissza', mobileOnly: true},
     {label: 'Főoldal', routerLink: '/'},
     {label: 'Események', routerLink: '/events'},
-    {label: 'Profil', role: 'user', routerLink: '/profile', isLogout: false},
+    {label: 'Profil', role: 'admin', routerLink: '/profile'},
     {label: 'Admin', role: 'admin', routerLink: '/admin'},
+    {label: 'Kosár', role: 'admin', routerLink: '/checkout'},
     {label: 'Bejelentkezés', click: () => this.toggleAuth(), isLogout: false},
     {label: 'Kijelentkezés', role: 'user', isLogout: true},
   ];
@@ -54,6 +54,7 @@ export class NavbarComponent {
 
   setUser(user: Partial<IUser>) : void {
     this.user = user;
+    this.closeAuth();
   }
 
   toggle(): void {

@@ -4,14 +4,16 @@
   </button>
   <nav class="desktop-nav">
     @for (item of navItems; track $index) {
-      @if (user?.role == 'admin' && item.role == 'admin' || item.role == 'user' || item.role == null) {
+      @if (user?.role == 'admin' && item.role == 'admin' || item.role == 'user' && user || item.role == null) {
         @if (!item.mobileOnly) {
           @if (item.routerLink) {
             @if (item.isLogout != false) {
               <a mat-button (click)="closeAuth()" routerLink="{{ item.routerLink }}">{{ item.label }}</a>
             }
           } @else if (item.click) {
-            <a mat-button (click)="item.click()">{{ item.label }}</a>
+            @if (user == null && !item.isLogout || user && item.isLogout) {
+              <a mat-button (click)="item.click()">{{ item.label }}</a>
+            }
           } @else if (this.user) {
             <a mat-button (click)="logout()">{{ item.label }}</a>
           }
@@ -31,9 +33,11 @@
               <a mat-list-item routerLink="{{ item.routerLink }}" (click)="sidenav.close()">{{ item.label }}</a>
             }
           } @else if (item.click) {
-            <a mat-list-item (click)="item.click()">{{ item.label }}</a>
-          } @else if (this.user) {
-            <a mat-button (click)="logout()">{{ item.label }}</a>
+            @if (user == null && !item.isLogout || user && item.isLogout) {
+              <a mat-list-item (click)="item.click()">{{ item.label }}</a>
+            }
+          } @else if (this.user && !item.mobileOnly) {
+            <a mat-list-item (click)="logout()">{{ item.label }}</a>
           } @else if (item.mobileOnly) {
             <a mat-list-item (click)="sidenav.close()">{{ item.label }}</a>
           }

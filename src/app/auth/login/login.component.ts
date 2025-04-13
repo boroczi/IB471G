@@ -7,6 +7,7 @@ import {SnackbarService} from '../../shared/service/snackbar.service';
 import {IUser} from '../../shared/interface/user.interface';
 import {MatIcon} from '@angular/material/icon';
 import {EAuth} from '../../shared/enum/auth.enum';
+import {user} from '../../shared/constant/user.const';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,7 @@ import {EAuth} from '../../shared/enum/auth.enum';
     MatIcon,
     MatIconButton
   ],
-  styleUrls: ['./login.component.scss']
+  styleUrl: './login.component.scss'
 })
 export class LoginComponent {
   loginForm: FormGroup;
@@ -38,15 +39,7 @@ export class LoginComponent {
 
   onSubmit() {
     if (this.loginForm.get('username')?.value == "test" && this.loginForm.get('password')?.value == "test") {
-      this.user.emit(
-        {
-          "id": 1,
-          "username": "test",
-          "email": "test@test.com",
-          "firstName": "Test",
-          "lastName": "User",
-          "role": "admin"
-        });
+      this.user.emit(user);
       this.SnackBar.open("Sikeres bejelentkezés");
     } else {
       this.SnackBar.open("Sikertelen bejelentkezés");

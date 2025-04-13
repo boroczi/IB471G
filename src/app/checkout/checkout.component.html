@@ -10,18 +10,13 @@
       <ng-container matColumnDef="quantity">
         <th mat-header-cell *matHeaderCellDef> Mennyiség </th>
         <td mat-cell *matCellDef="let item">
-          <input matInput type="number" [value]="item.quantity" (change)="updateQuantity(item, $event)" />
+          <input matInput min="1" type="number" [value]="item.quantity" (change)="updateQuantity(item, $event)" />
         </td>
       </ng-container>
 
       <ng-container matColumnDef="price">
         <th mat-header-cell *matHeaderCellDef> Ár </th>
         <td mat-cell *matCellDef="let item"> {{item.price}} Ft </td>
-      </ng-container>
-
-      <ng-container matColumnDef="total">
-        <th mat-header-cell *matHeaderCellDef> Összesen </th>
-        <td mat-cell *matCellDef="let item"> {{item.quantity * item.price}} Ft </td>
       </ng-container>
 
       <ng-container matColumnDef="actions">
@@ -33,8 +28,8 @@
         </td>
       </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="['name', 'quantity', 'price', 'total', 'actions']"></tr>
-      <tr mat-row *matRowDef="let row; columns: ['name', 'quantity', 'price', 'total', 'actions'];"></tr>
+      <tr mat-header-row *matHeaderRowDef="['name', 'quantity', 'price', 'actions']"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['name', 'quantity', 'price', 'actions'];"></tr>
     </table>
 
     <div class="checkout-summary">

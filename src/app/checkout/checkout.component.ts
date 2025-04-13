@@ -4,13 +4,9 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-
-interface CartItem {
-  id: number;
-  name: string;
-  quantity: number;
-  price: number;
-}
+import { CartItem } from '../shared/interface/cartitem.interface';
+import {cartItems} from '../shared/constant/cartitems.const';
+import {SnackbarService} from '../shared/service/snackbar.service';
 
 @Component({
   selector: 'app-checkout',
@@ -22,13 +18,14 @@ interface CartItem {
     MatInputModule
   ],
   templateUrl: './checkout.component.html',
-  styleUrls: ['./checkout.component.scss']
+  styleUrl: './checkout.component.scss'
 })
 export class CheckoutComponent {
-  cartItems: CartItem[] = [
-    { id: 1, name: 'Koncert A', quantity: 2, price: 50 },
-    { id: 2, name: 'Koncert B', quantity: 1, price: 30 },
-  ];
+  protected cartItems: CartItem[] = [];
+
+  constructor(private SnackBar: SnackbarService) {
+    this.cartItems = cartItems;
+  }
 
   get totalPrice(): number {
     return this.cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
@@ -40,7 +37,7 @@ export class CheckoutComponent {
     if (newQuantity > 0) {
       item.quantity = newQuantity;
     } else {
-      item.quantity = 1; // Minimum 1 jegy legyen.
+      item.quantity = 1;
     }
   }
 
@@ -49,7 +46,7 @@ export class CheckoutComponent {
   }
 
   handlePurchase(): void {
-    alert('Köszönjük a vásárlást!');
+    this.SnackBar.open("Sikeres vásárlás!");
     this.cartItems = [];
   }
 }
