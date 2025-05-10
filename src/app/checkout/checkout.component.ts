@@ -1,11 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { CartItem } from '../shared/interface/cartitem.interface';
-import {cartItems} from '../shared/constant/cartitems.const';
 import {SnackbarService} from '../shared/service/snackbar.service';
 
 @Component({
@@ -24,8 +23,14 @@ export class CheckoutComponent {
   protected cartItems: CartItem[] = [];
 
   constructor(private SnackBar: SnackbarService) {
-    this.cartItems = cartItems;
-  }
+  const cart = localStorage.getItem('cart');
+  this.cartItems = cart ? Object.entries(JSON.parse(cart)).map(([id, item]: [string, any]) => ({
+    id: parseInt(id, 10),
+    name: item.name,
+    price: item.price,
+    quantity: item.quantity
+  })) : [];
+}
 
   get totalPrice(): number {
     return this.cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
@@ -47,6 +52,7 @@ export class CheckoutComponent {
 
   handlePurchase(): void {
     this.SnackBar.open("Sikeres vásárlás!");
+    localStorage.removeItem('cart');
     this.cartItems = [];
   }
 }

@@ -2,8 +2,7 @@ import {IUser} from '../interface/user.interface';
 
 export const users: IUser[] = [
   {
-    id: 1,
-    username: 'admin',
+    id: 'asfasf',
     password: 'admin123',
     email: 'admin@example.com',
     firstName: 'Admin',
@@ -11,8 +10,7 @@ export const users: IUser[] = [
     role: 'admin'
   },
   {
-    id: 2,
-    username: 'johndoe',
+    id: 'xdd',
     password: 'password123',
     email: 'johndoe@example.com',
     firstName: 'John',
@@ -20,8 +18,7 @@ export const users: IUser[] = [
     role: 'user'
   },
   {
-    id: 3,
-    username: 'janedoe',
+    id: 'ads',
     password: 'password456',
     email: 'janedoe@example.com',
     firstName: 'Jane',

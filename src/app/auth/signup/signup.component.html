@@ -10,20 +10,14 @@
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <div>
           <mat-form-field appearance="fill">
-            <mat-label>Felhasználónév</mat-label>
-            <input matInput formControlName="username" type="text" required>
+            <mat-label>Email-cím</mat-label>
+            <input matInput formControlName="email" type="text" required>
           </mat-form-field>
         </div>
         <div>
           <mat-form-field appearance="fill">
             <mat-label>Jelszó</mat-label>
             <input matInput formControlName="password" type="password" required>
-          </mat-form-field>
-        </div>
-        <div>
-          <mat-form-field appearance="fill">
-            <mat-label>Email-cím</mat-label>
-            <input matInput formControlName="email" type="text" required>
           </mat-form-field>
         </div>
         <div>

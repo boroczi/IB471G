@@ -54,8 +54,8 @@
   @if (authModal == EAuth.auth) {
     <app-auth [closeModal]="closeAuth.bind(this)" (modal)="changeModal($event)"></app-auth>
   } @else if (authModal == EAuth.login) {
-    <app-login [changeModal]="changeModal.bind(this)" (user)="setUser($event)"></app-login>
+    <app-login [changeModal]="changeModal.bind(this)" [closeModal]="closeAuth.bind(this)" (user)="setUser($event)"></app-login>
   } @else if (authModal == EAuth.signup) {
-    <app-signup [changeModal]="changeModal.bind(this)"></app-signup>
+    <app-signup [changeModal]="changeModal.bind(this)" [closeModal]="closeAuth.bind(this)"></app-signup>
   }
 }

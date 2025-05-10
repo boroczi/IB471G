@@ -34,11 +34,17 @@
               <td>{{ event.ticketPrice }} Ft</td>
             </tr>
           </table>
-
-          <button mat-fab extended>
-            <mat-icon>shopping_cart</mat-icon>
-            Kosárba
-          </button>
+          @if (localStorage.getItem('isLoggedIn') == 'true') {
+            <button mat-fab extended (click)="addToCart(event.id, event.name, event.ticketPrice)">
+              <mat-icon>shopping_cart</mat-icon>
+              Kosárba
+            </button>
+          } @else {
+            <button mat-fab extended (click)="nuhuh()">
+              <mat-icon>shopping_cart</mat-icon>
+              A vásárláshoz jelentkezz be!
+            </button>
+          }
         </mat-expansion-panel>
       }
     </mat-accordion>

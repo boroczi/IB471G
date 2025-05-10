@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {RouterLink} from '@angular/router';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
@@ -12,6 +12,8 @@ import {SignupComponent} from '../../../auth/signup/signup.component';
 import {EAuth} from '../../enum/auth.enum';
 import {SnackbarService} from '../../service/snackbar.service';
 import {INavItem} from '../../interface/navitem.interface';
+import { AuthService } from '../../service/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-navbar',
@@ -31,7 +33,7 @@ import {INavItem} from '../../interface/navitem.interface';
   styleUrl: './navbar.component.scss'
 })
 
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   @ViewChild('sidenav') sidenav: MatSidenav | undefined;
   showAuth: boolean = false;
   authModal: EAuth = EAuth.auth;
@@ -39,16 +41,22 @@ export class NavbarComponent {
     {label: 'Vissza', mobileOnly: true},
     {label: 'Főoldal', routerLink: '/'},
     {label: 'Események', routerLink: '/events'},
-    {label: 'Profil', role: 'admin', routerLink: '/profile'},
+    {label: 'Profil', role: 'user', routerLink: '/profile'},
     {label: 'Admin', role: 'admin', routerLink: '/admin'},
-    {label: 'Kosár', role: 'admin', routerLink: '/checkout'},
+    {label: 'Kosár', role: 'user', routerLink: '/checkout'},
     {label: 'Bejelentkezés', click: () => this.toggleAuth(), isLogout: false},
     {label: 'Kijelentkezés', role: 'user', isLogout: true},
   ];
 
   user: Partial<IUser> | null;
 
-  constructor(private SnackBar: SnackbarService) {
+  ngOnInit(): void {
+    if (localStorage.getItem('isLoggedIn') == 'true') {
+      this.user = localStorage.getItem('user') as Partial<IUser>;
+    }
+  }
+
+  constructor(private SnackBar: SnackbarService, private authService: AuthService) {
     this.user = null;
   }
 
@@ -65,6 +73,7 @@ export class NavbarComponent {
 
   logout(): void {
     this.user = null;
+    this.authService.signOut;
     this.SnackBar.open("Sikeresen kijelentkeztél!")
   }
 
