@@ -10,7 +10,7 @@
   <mat-card-content>
     @if (showForm) {
     <div>
-      <form [formGroup]="eventForm" (ngSubmit)="onSubmit()" class="eventmanager-form">
+      <form [formGroup]="eventForm" (ngSubmit)="editMode ? saveUpdatedEvent() : onSubmit()" class="eventmanager-form">
         <div class="form-row">
           <mat-form-field appearance="fill" class="form-field">
             <mat-label>Esemény neve</mat-label>
@@ -62,7 +62,13 @@
         </mat-form-field>
 
         <div class="form-actions">
-          <button mat-raised-button color="primary" type="submit">Létrehozás</button>
+          <button mat-raised-button color="primary" type="submit">
+            {{ editMode ? 'Módosítás' : 'Létrehozás' }}
+          </button>
+          @if (editMode) {
+          <button mat-raised-button color="warn" type="button" (click)="resetForm()">
+            Mégse
+          </button> }
         </div>
       </form>
     </div>
@@ -99,11 +105,11 @@
             </tr>
           </table>
 
-          <button mat-fab extended>
+          <button mat-fab extended (click)="deleteEvent(event.id)">
             <mat-icon>delete</mat-icon>
             Törlés
           </button>
-          <button mat-fab extended>
+          <button mat-fab extended (click)="updateEvent(event.id, event)">
             <mat-icon>create</mat-icon>
             Módosítás
           </button>
