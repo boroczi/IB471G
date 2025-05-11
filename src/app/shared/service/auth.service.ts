@@ -9,7 +9,13 @@ import {
   signOut,
   createUserWithEmailAndPassword,
 } from '@angular/fire/auth';
-import { Firestore, collection, doc, setDoc } from '@angular/fire/firestore';
+import {
+  Firestore,
+  collection,
+  doc,
+  setDoc,
+  getDoc,
+} from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { IUser } from '../interface/user.interface';
 
@@ -38,14 +44,18 @@ export class AuthService {
     lastName: string
   ): Promise<UserCredential> {
     try {
-      const userCred = createUserWithEmailAndPassword(this.auth, email, password);
+      const userCred = createUserWithEmailAndPassword(
+        this.auth,
+        email,
+        password
+      );
 
       await this.createUserData((await userCred).user.uid, {
         id: (await userCred).user.uid,
         firstName: firstName,
         lastName: lastName,
-        role: 'user'
-      })
+        role: 'user',
+      });
 
       return userCred;
     } catch (error) {
@@ -53,15 +63,19 @@ export class AuthService {
     }
   }
 
-  private async createUserData(userId: string, userData: Partial<IUser>): Promise<void> {
+  private async createUserData(
+    userId: string,
+    userData: Partial<IUser>
+  ): Promise<void> {
     const userRef = doc(collection(this.firestore, 'users'), userId);
-    
+
     return setDoc(userRef, userData);
   }
 
   signOut(): Promise<void> {
     localStorage.setItem('isLoggedIn', 'false');
     localStorage.removeItem('user');
+    localStorage.removeItem('cart');
     return signOut(this.auth);
   }
 
@@ -71,5 +85,22 @@ export class AuthService {
 
   updateLoginStatus(isLoggedIn: boolean): void {
     localStorage.setItem('isLoggedIn', isLoggedIn ? 'true' : 'false');
+  }
+
+  async validateAdmin(): Promise<boolean> {
+    const user = localStorage.getItem('user');
+    if (user) {
+      const userObject = JSON.parse(user);
+      const userDocRef = doc(this.firestore, 'users', userObject.id);
+      const userSnapshot = await getDoc(userDocRef);
+
+      if (!userSnapshot.exists()) {
+        return false;
+      }
+
+      const userData = userSnapshot.data() as Partial<IUser>;
+      return userData.role === 'admin';
+    }
+    return false;
   }
 }
