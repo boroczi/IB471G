@@ -9,6 +9,8 @@
           @if (item.routerLink) {
             @if (item.isLogout != false) {
               <a mat-button (click)="closeAuth()" routerLink="{{ item.routerLink }}">{{ item.label }}</a>
+            } @else {
+              <a mat-button routerLink="{{ item.routerLink }}">{{ item.label }}</a>
             }
           } @else if (item.click) {
             @if (user == null && !item.isLogout || user && item.isLogout) {

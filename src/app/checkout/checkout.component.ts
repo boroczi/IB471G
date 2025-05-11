@@ -25,7 +25,7 @@ export class CheckoutComponent {
   constructor(private SnackBar: SnackbarService) {
   const cart = localStorage.getItem('cart');
   this.cartItems = cart ? Object.entries(JSON.parse(cart)).map(([id, item]: [string, any]) => ({
-    id: parseInt(id, 10),
+    id: id,
     name: item.name,
     price: item.price,
     quantity: item.quantity
@@ -48,6 +48,7 @@ export class CheckoutComponent {
 
   removeFromCart(item: CartItem): void {
     this.cartItems = this.cartItems.filter(cartItem => cartItem.id !== item.id);
+    localStorage.setItem('cart', JSON.stringify(this.cartItems));
   }
 
   handlePurchase(): void {

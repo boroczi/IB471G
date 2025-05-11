@@ -1,4 +1,5 @@
 import {Routes} from '@angular/router';
+import { adminGuard, authGuard } from './shared/guard/auth.guard';
 
 export const routes: Routes = [
   {
@@ -10,11 +11,13 @@ export const routes: Routes = [
     path: 'admin',
     loadComponent: () => import('./admin/admin.component').then(m => m.AdminComponent),
     pathMatch: 'full',
+    canActivate: [adminGuard]
   },
   {
     path: 'checkout',
     loadComponent: () => import('./checkout/checkout.component').then(m => m.CheckoutComponent),
     pathMatch: 'full',
+    canActivate: [authGuard]
   },
   {
     path: 'events',
@@ -25,6 +28,7 @@ export const routes: Routes = [
     path: 'profile',
     loadComponent: () => import('./profile/profile.component').then(m => m.ProfileComponent),
     pathMatch: 'full',
+    canActivate: [authGuard]
   },
   {
     path: '**',

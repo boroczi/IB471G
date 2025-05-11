@@ -73,6 +73,9 @@ export class NavbarComponent implements OnInit {
 
   logout(): void {
     this.user = null;
+    localStorage.removeItem('user');
+    localStorage.removeItem('cart');
+    localStorage.setItem('isLoggedIn', 'false');
     this.authService.signOut;
     this.SnackBar.open("Sikeresen kijelentkeztél!")
   }

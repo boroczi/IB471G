@@ -14,7 +14,7 @@ import {
   collection,
   doc,
   setDoc,
-  getDoc,
+  getDoc
 } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { IUser } from '../interface/user.interface';

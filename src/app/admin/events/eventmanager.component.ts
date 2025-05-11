@@ -5,7 +5,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { DatePipe } from '../../shared/pipe/date.pipe';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFabButton, MatIconButton } from '@angular/material/button';
-import { events } from '../../shared/constant/events.const';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';

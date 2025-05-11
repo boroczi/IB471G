@@ -37,8 +37,7 @@ export class EventsComponent implements OnInit {
   addToCart(id: string, name: string, price: number) {
     if (localStorage.getItem('isLoggedIn') == 'true') {
       const cart = localStorage.getItem('cart');
-
-      if (cart) {
+      if (cart && cart !== '[]') {
         const cartObject = JSON.parse(cart);
 
         if (cartObject[id]?.quantity) {
@@ -47,12 +46,10 @@ export class EventsComponent implements OnInit {
           cartObject[id] = { name, price, quantity: 1 };
         }
         localStorage.setItem('cart', JSON.stringify(cartObject));
-        console.log(this.localStorage.getItem('cart'));
       } else {
         const newCart: { [key: string]: { name: string; price: number; quantity: number } } = {};
         newCart[id] = { name, price, quantity: 1 };
         localStorage.setItem('cart', JSON.stringify(newCart));
-        console.log(this.localStorage.getItem('cart'));
       }
     } else {
       this.SnackBar.open("Kérlek jelentkezz be a vásárláshoz");
