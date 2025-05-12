@@ -7,9 +7,11 @@ import {
   collectionData,
   deleteDoc,
   updateDoc,
+  docData,
 } from '@angular/fire/firestore';
 import { IEvent } from '../interface/event.interface';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
+import { timeout, map, catchError } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -53,5 +55,29 @@ export class EventService {
       return updateDoc(eventRef, updatedData);
     }
     return Promise.resolve();
+  }
+
+  checkoutUpdate(eventId: string, updatedData: Partial<IEvent>): Observable<void> {
+    const eventRef = doc(this.firestore, `events/${eventId}`);
+    return from(updateDoc(eventRef, updatedData).then(() => {
+    }).catch(error => {
+      throw error;
+    })).pipe(
+      catchError(error => {
+        throw error;
+      })
+    );
+  }
+
+  getEventById(eventId: string): Observable<IEvent | undefined> {
+    const eventDocRef = doc(this.firestore, `events/${eventId}`);
+    return docData(eventDocRef, { idField: 'id' }).pipe(
+      map(data => {
+        return data as IEvent | undefined;
+      }),
+      catchError(error => {
+        throw error;
+      })
+    );
   }
 }
