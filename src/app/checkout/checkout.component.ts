@@ -7,8 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { CartItem } from '../shared/interface/cartitem.interface';
 import { SnackbarService } from '../shared/service/snackbar.service';
 import { EventService } from '../shared/service/event.service';
-import { forkJoin, of, firstValueFrom } from 'rxjs';
-import { switchMap, tap } from 'rxjs/operators';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-checkout',
